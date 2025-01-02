@@ -1,0 +1,55 @@
+# Logs (server and client)
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Python-related files (server)
+server/__pycache__/
+server/**/__pycache__/
+server/*.py[cod]
+server/*.pyo
+server/*.pyd
+
+# Django-specific (server)
+server/db.sqlite3
+server/media/
+server/staticfiles/
+
+# Environment files (server and client)
+server/.env
+server/*.env
+client/.env
+client/*.env.local
+client/*.env.development.local
+client/*.env.test.local
+client/*.env.production.local
+
+# Build output (client)
+client/node_modules/
+client/dist/
+client/dist-ssr/
+
+# Virtual Environment (server)
+server/venv/
+server/*.venv
+
+# System files (common)
+.DS_Store
+Thumbs.db
+
+# Editor directories and files (common)
+.vscode/
+.idea/
+*.iml
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Ignore additional VSCode files, but keep extensions.json
+!.vscode/extensions.json
