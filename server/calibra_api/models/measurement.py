@@ -1,6 +1,6 @@
 from django.db import models
 from .device import Device
-from .unitPrefix import UnitPrefix
+from .prefix import Prefix
 
 class Measurement(models.Model):
     device = models.ForeignKey(Device, on_delete=models.CASCADE)
@@ -8,24 +8,25 @@ class Measurement(models.Model):
 
     input_value = models.DecimalField(max_digits=10, decimal_places=4, null=True, blank=True)
     output_value = models.DecimalField(max_digits=10, decimal_places=4, null=True, blank=True)
-
-    prefix1 = models.ForeignKey(UnitPrefix, on_delete=models.SET_NULL, null=True, blank=True, to_field="symbol", related_name="prefix1")
+    prefix1 = models.ForeignKey(Prefix, on_delete=models.SET_NULL, null=True, blank=True, to_field="symbol", related_name="prefix1")
     unit1 = models.CharField(max_length=50, null=True, blank=True)  # Actual unit (e.g., grams)
 
     deviation = models.DecimalField(max_digits=10, decimal_places=4, null=True, blank=True)
-    uncertainty = models.DecimalField(max_digits=10, decimal_places=4, null=True, blank=True)
-
-    prefix2 = models.ForeignKey(UnitPrefix, on_delete=models.SET_NULL, null=True, blank=True, to_field="symbol", related_name="prefix2")
+    prefix2 = models.ForeignKey(Prefix, on_delete=models.SET_NULL, null=True, blank=True, to_field="symbol", related_name="prefix2")
     unit2 = models.CharField(max_length=50, null=True, blank=True)  # Actual unit (e.g., liters)
-
-    tolerance = models.DecimalField(max_digits=10, decimal_places=4, null=True, blank=True)
-    prefix3 = models.ForeignKey(UnitPrefix, on_delete=models.SET_NULL, null=True, blank=True, to_field="symbol", related_name="prefix3")
+   
+    uncertainty = models.DecimalField(max_digits=10, decimal_places=4, null=True, blank=True)
+    prefix3 = models.ForeignKey(Prefix, on_delete=models.SET_NULL, null=True, blank=True, to_field="symbol", related_name="prefix3")
     unit3 = models.CharField(max_length=50, null=True, blank=True)  # Actual unit (e.g., meters)
-
-    parameter = models.DecimalField(max_digits=10, decimal_places=4, null=True, blank=True)
-    prefix4 = models.ForeignKey(UnitPrefix, on_delete=models.SET_NULL, null=True, blank=True, to_field="symbol", related_name="prefix4")
+    
+    tolerance = models.DecimalField(max_digits=10, decimal_places=4, null=True, blank=True)
+    prefix4 = models.ForeignKey(Prefix, on_delete=models.SET_NULL, null=True, blank=True, to_field="symbol", related_name="prefix4")
     unit4 = models.CharField(max_length=50, null=True, blank=True)  # Actual unit (e.g., meters)
-
+    
+    parameter = models.DecimalField(max_digits=10, decimal_places=4, null=True, blank=True)
+    prefix5 = models.ForeignKey(Prefix, on_delete=models.SET_NULL, null=True, blank=True, to_field="symbol", related_name="prefix5")
+    unit5 = models.CharField(max_length=50, null=True, blank=True)  # Actual unit (e.g., meters)
+    
     threshold = models.DecimalField(max_digits=10, decimal_places=4, null=True, blank=True)
     identifier = models.CharField(max_length=255, null=True, blank=True)
     status = models.PositiveSmallIntegerField(null=True, blank=True)
