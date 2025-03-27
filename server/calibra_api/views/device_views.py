@@ -8,3 +8,11 @@ class DeviceViewSet(viewsets.ViewSet):
     """
     queryset = Device.objects.all()
     serializer_class = DeviceSerializer
+
+# Auto functions:
+# list
+# retrieve
+# create
+# update
+# partial_update
+# destroy

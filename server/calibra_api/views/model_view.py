@@ -9,3 +9,11 @@ class ModelViewSet(viewsets.ModelViewSet):
     """
     queryset = Model.objects.all()
     serializer_class = ModelSerializer
+
+# Auto functions:
+# list
+# retrieve
+# create
+# update
+# partial_update
+# destroy

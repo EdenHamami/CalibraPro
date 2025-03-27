@@ -8,3 +8,11 @@ class MeasurementViewSet(viewsets.ViewSet):
     """
     queryset = Measurement.objects.all()
     serializer_class = MeasurementSerializer
+
+# Auto functions:
+# list
+# retrieve
+# create
+# update
+# partial_update
+# destroy
