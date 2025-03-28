@@ -53,3 +53,4 @@ Thumbs.db
 
 # Ignore additional VSCode files, but keep extensions.json
 !.vscode/extensions.json
+node_modules/
