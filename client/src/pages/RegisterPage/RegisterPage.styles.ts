@@ -1,10 +1,13 @@
-// client\src\pages\RegisterPage\RegisterPage.styles.ts
-export const registerPageStyles = {
+// client/src/pages/RegisterPage/RegisterPage.styles.ts
+import { SxProps, Theme } from "@mui/material/styles";
+
+export const registerPageStyles: Record<string, SxProps<Theme>> = {
   container: {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    height:{ xs: "auto", sm: "calc(100vh - 64px)" }  },
+    height: "100%",
+  },
   box: {
     width: "100%",
     padding: 4,
@@ -13,6 +16,9 @@ export const registerPageStyles = {
     textAlign: "center",
     backgroundColor: "white",
   },
+  submitButton: {
+    mt: 2,
+  },
   switchText: {
     mt: 2,
     fontSize: "14px",
@@ -20,5 +26,9 @@ export const registerPageStyles = {
   switchButton: {
     textTransform: "none",
     fontWeight: "bold",
+  },
+  alert: {
+    whiteSpace: "pre-line",
+    mt: 2,
   },
 };

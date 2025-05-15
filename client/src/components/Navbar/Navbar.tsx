@@ -48,9 +48,15 @@ const Navbar: React.FC = () => {
   return (
     <AppBar position="static" color="primary">
       <Toolbar sx={toolbarStyles}>
-        <Typography variant="h6" component="div" sx={logoStyles} onClick={() => navigate("/")}>
+        <Typography
+          variant="h6"
+          component="div"
+          sx={logoStyles}
+          onClick={() => navigate(isLoggedIn ? "/dashboard" : "/")}
+        >
           CalibraPro
         </Typography>
+
 
         {isLoggedIn && user ? (
           <Box>

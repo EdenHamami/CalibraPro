@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+AUTH_USER_MODEL = 'calibra_api.User'
 
 # Application definition
 
@@ -87,7 +88,7 @@ DATABASES = {
         'USER': config('DB_USER'),            # Database user
         'PASSWORD': config('DB_PASSWORD'),    # Database password
         'HOST': config('DB_HOST', default='127.0.0.1'),  # Database host
-        'PORT': config('DB_PORT', default='3306'),       # Database port
+        'PORT': config('DB_PORT', default='3307'),       # Database port
     }
 }
 
@@ -156,3 +157,8 @@ CORS_ALLOW_HEADERS = [
     "Content-Type",
     "X-CSRFToken"
 ]
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+    ]
+}

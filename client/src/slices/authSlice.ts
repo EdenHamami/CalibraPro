@@ -40,7 +40,10 @@ export const login = createAsyncThunk(
 // Async register action
 export const register = createAsyncThunk(
   "auth/register",
-  async (userData: { email: string; password: string; display_name: string }, thunkAPI) => {
+  async (
+    userData: { email: string; password: string; display_name: string },
+    thunkAPI
+  ) => {
     try {
       const response = await registerUser(userData);
       return response;
@@ -54,12 +57,18 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    // Clear user data and remove token
+    // Set user from localStorage when app loads
+    setUserFromStorage(state, action: PayloadAction<{ user: User }>) {
+      state.user = action.payload.user;
+      state.isLoggedIn = true;
+    },
+
+    // Clear user data and remove token + user from storage
     logout(state) {
       state.user = null;
       state.isLoggedIn = false;
       state.error = null;
-      localStorage.removeItem("token");
+      localStorage.removeItem("user");
     },
   },
   extraReducers: (builder) => {
@@ -69,12 +78,16 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(login.fulfilled, (state, action: PayloadAction<{ user: User; token: string }>) => {
-        state.loading = false;
-        state.user = action.payload.user;
-        state.isLoggedIn = true;
-        localStorage.setItem("token", action.payload.token);
-      })
+      .addCase(
+        login.fulfilled,
+        (state, action: PayloadAction<{ user: User; token: string }>) => {
+          state.loading = false;
+          const fullUser = { ...action.payload.user, token: action.payload.token };
+          state.user = fullUser;
+          state.isLoggedIn = true;
+          localStorage.setItem("user", JSON.stringify(fullUser));
+        }
+      )
       .addCase(login.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
@@ -85,12 +98,16 @@ const authSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(register.fulfilled, (state, action: PayloadAction<{ user: User; token: string }>) => {
-        state.loading = false;
-        state.user = action.payload.user;
-        state.isLoggedIn = true;
-        localStorage.setItem("token", action.payload.token);
-      })
+      .addCase(
+        register.fulfilled,
+        (state, action: PayloadAction<{ user: User; token: string }>) => {
+          state.loading = false;
+          const fullUser = { ...action.payload.user, token: action.payload.token };
+          state.user = fullUser;
+          state.isLoggedIn = true;
+          localStorage.setItem("user", JSON.stringify(fullUser));
+        }
+      )
       .addCase(register.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload as string;
@@ -98,5 +115,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout } = authSlice.actions;
+export const { logout, setUserFromStorage } = authSlice.actions;
 export default authSlice.reducer;
