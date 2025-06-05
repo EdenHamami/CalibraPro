@@ -59,7 +59,7 @@ const RegisterPage = () => {
       };
 
       await dispatch(register(userData)).unwrap();
-      navigate("/my-devices");
+      navigate("/dashboard");
     } catch (error: any) {
       setServerError(error || "Registration failed.");
     }

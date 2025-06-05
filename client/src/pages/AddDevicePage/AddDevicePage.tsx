@@ -7,6 +7,7 @@ import {
   TextField,
   Button,
   Alert,
+  Link,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -75,7 +76,11 @@ const AddDevicePage = () => {
         <Box sx={addDeviceStyles.box}>
           <Typography sx={addDeviceStyles.title}>Add New Device</Typography>
 
-          {error && <Alert severity="error" sx={addDeviceStyles.alert}>{error}</Alert>}
+          {error && (
+            <Alert severity="error" sx={addDeviceStyles.alert}>
+              {error}
+            </Alert>
+          )}
 
           {!success ? (
             <form onSubmit={handleSubmit} style={addDeviceStyles.form as any}>
@@ -106,6 +111,7 @@ const AddDevicePage = () => {
               <Button
                 type="submit"
                 variant="contained"
+                fullWidth
                 sx={addDeviceStyles.submitButton}
               >
                 Add Device
@@ -113,28 +119,35 @@ const AddDevicePage = () => {
             </form>
           ) : (
             <Box sx={addDeviceStyles.successBox}>
-              <Typography variant="h5" sx={addDeviceStyles.successTitle}>
+              <Alert severity="success" sx={addDeviceStyles.successAlert}>
                 Device added successfully!
-              </Typography>
-              <Typography sx={addDeviceStyles.successText}>
-                You can now view the device, go to the full list, or add another one.
-              </Typography>
+              </Alert>
 
               <Box sx={addDeviceStyles.buttonGroup}>
-                <Button variant="outlined" onClick={resetForm}>
-                  Add Another
-                </Button>
-                <Button variant="outlined" onClick={() => navigate("/my-devices")}>
+                <Button
+                  variant="outlined"
+                  onClick={() => navigate("/my-devices")}
+                >
                   View All Devices
                 </Button>
                 <Button
                   variant="contained"
-                  onClick={() => createdDeviceId && navigate(`/devices/${createdDeviceId}`)}
-                  disabled={!createdDeviceId}
+                  onClick={() =>
+                    createdDeviceId && navigate(`/devices/${createdDeviceId}`)
+                  }
                 >
                   Go to Device Page
                 </Button>
               </Box>
+
+              <Link
+                component="button"
+                underline="hover"
+                onClick={resetForm}
+                sx={addDeviceStyles.addAnotherLink}
+              >
+                + Add Another Device
+              </Link>
             </Box>
           )}
         </Box>
