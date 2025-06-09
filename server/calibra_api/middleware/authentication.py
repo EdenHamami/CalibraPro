@@ -1,7 +1,7 @@
 import jwt
 from django.conf import settings
 from django.http import JsonResponse
-from calibra_api.models.user import User  # עדכני לפי מיקום המודל
+from calibra_api.models.user import User
 
 class AuthenticationMiddleware:
     def __init__(self, get_response):
